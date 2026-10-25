@@ -1,5 +1,5 @@
 import express from "express";
-import path from 'path';
+
 
 
 
@@ -11,8 +11,7 @@ const port = 3000;
 app.set("view engine", "ejs");
 app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
-app.use('/css', express.static(path.join(process.cwd(), 'node_modules/bootstrap/dist/css')));
-app.use('/js', express.static(path.join(process.cwd(), 'node_modules/bootstrap/dist/js')));
+
 
 
 app.get("/", (req, res)=>{
