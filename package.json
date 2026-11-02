@@ -1,29 +1,26 @@
 {
   "name": "clinica_petshop",
-  "version": "0.0.1",
-  "description": "Site para uso de clinica veterinária e petshop",
-  "homepage": "https://github.com/LuizMadaloz/Petshop-Clinica#readme",
-  "bugs": {
-    "url": "https://github.com/LuizMadaloz/Petshop-Clinica/issues"
+  "version": "1.0.0",
+  "description": "> Projeto pessoal de um sistema integrado para gerenciamento completo de Petshops e Clínicas Veterinárias.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuizMadaloz/Petshop-Clinica.git"
   },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "author": "Luiz Madaloz",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/LuizMadaloz/Petshop-Clinica/issues"
   },
+  "homepage": "https://github.com/LuizMadaloz/Petshop-Clinica#readme",
   "dependencies": {
-    "@floating-ui/dom": "^1.8.0",
-    "bootstrap": "^6.0.0-alpha.1",
-    "ejs": "^7.0.2",
+    "dotenv": "^18.0.9",
     "express": "^5.3.0",
-    "mysql2": "^3.24.6",
-    "nodemon": "^3.1.14",
-    "vanilla-calendar-pro": "^3.4.0"
+    "mysql2": "^3.24.6"
   }
 }
