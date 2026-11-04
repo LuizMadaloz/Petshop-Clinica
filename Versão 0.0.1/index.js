@@ -74,10 +74,6 @@ app.get("/relatorios", (req, res)=>{
 });
 
 
-
-
-
-
 app.get("/vendas", (req, res)=>{
   res.render("vendas.ejs");
 });
@@ -87,15 +83,17 @@ app.get("/clientes", (req, res)=>{
 });
 
 
+// Começa os Post
 
 app.post("/relatorios", async (req  , res)=>{
   const opcaoSelecionada = req.body.tipo || ""; 
   const nomeFun = req.body.busca || "";
+  const nCpf = req.body.buscaCpf || "";
   let listaFunc = [];
 
   if(opcaoSelecionada === "funcionarios"){
   try{
-    const [resultados] = await connection.query("select * from funcionarios where nomeF like ?",[`%${nomeFun}%`]);
+    const [resultados] = await connection.query("select * from funcionarios where nomeF like ? and cpf like ?",[`%${nomeFun}%`, `%${nCpf}%`]);
     console.log(resultados);
     listaFunc = resultados;
   }catch(erro){

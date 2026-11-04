@@ -25,6 +25,8 @@
             <input type="hidden" name="tipo" value="funcionarios">
             <label for="busca">Digite o nome do funcionário:</label>
             <input type="text" name="busca" placeholder="Ex: Carlos">
+            <label for="buscaCpf">Digite o Cpf</label>
+            <input type="text" name="buscaCpf">
             <button type="submit">Buscar</button>
         </form>
     </div>
@@ -44,6 +46,7 @@
       
         <p>Nome: <%= funcionario.nomeF %></p>
         <p>ID: <%= funcionario.id %></p> 
+        <p>Cpf: <%= funcionario.cpf %></p>
         <hr>
     <% }); %>
 <% } %>
