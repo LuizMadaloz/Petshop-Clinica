@@ -53,22 +53,11 @@ async function testarConexao() {
   }
 };
 
-async function funcionarios() {
-  
-  try{
-    const [funcionarios] = await connection.query('select * from funcionarios');
-    console.log(funcionarios);
-
-  }catch(erro){
-    console.log("ocorreu um erro",erro);
-
-  }
-};
 
 
 
 testarConexao();
-funcionarios();
+
 
 app.get("/", (req, res)=>{
     res.render("index.ejs");
@@ -79,9 +68,22 @@ app.get("/servicos",(req, res )=>{
 });
 
 app.get("/relatorios", (req, res)=>{
+  const opcaoSelecionada = req.query.opcao || ""; 
+  async function relatorio(tipo , busca , ) {
+  
+  try{
+    const [funcionarios] = await connection.query(`select * from ${tipo} where `);
+    console.log(funcionarios);
+
+  }catch(erro){
+    console.log("ocorreu um erro",erro);
+
+  }
+};
 
 
-  res.render("relatorios.ejs");
+
+  res.render("relatorios.ejs",{ opcaoSelecionada: opcaoSelecionada });
 });
 
 app.get("/vendas", (req, res)=>{
