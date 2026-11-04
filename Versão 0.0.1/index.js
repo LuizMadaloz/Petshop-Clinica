@@ -68,23 +68,15 @@ app.get("/servicos",(req, res )=>{
 });
 
 app.get("/relatorios", (req, res)=>{
-  const opcaoSelecionada = req.query.opcao || ""; 
-  async function relatorio(tipo , busca , ) {
-  
-  try{
-    const [funcionarios] = await connection.query(`select * from ${tipo} where `);
-    console.log(funcionarios);
-
-  }catch(erro){
-    console.log("ocorreu um erro",erro);
-
-  }
-};
 
 
-
-  res.render("relatorios.ejs",{ opcaoSelecionada: opcaoSelecionada });
+  res.render("relatorios.ejs");
 });
+
+
+
+
+
 
 app.get("/vendas", (req, res)=>{
   res.render("vendas.ejs");
@@ -93,6 +85,27 @@ app.get("/vendas", (req, res)=>{
 app.get("/clientes", (req, res)=>{
   res.render("clientes.ejs");
 });
+
+
+
+app.post("/relatorios", async (req  , res)=>{
+  const opcaoSelecionada = req.body.tipo || ""; 
+  const nomeFun = req.body.busca || "";
+  let listaFunc = [];
+
+  if(opcaoSelecionada === "funcionarios"){
+  try{
+    const [resultados] = await connection.query("select * from funcionarios where nomeF like ?",[`%${nomeFun}%`]);
+    console.log(resultados);
+    listaFunc = resultados;
+  }catch(erro){
+    console.log("ocorreu um erro",erro);
+};};
+
+res.render("relatorios.ejs",{ funcionarios: listaFunc });
+
+});
+
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

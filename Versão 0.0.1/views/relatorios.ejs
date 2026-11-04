@@ -8,16 +8,18 @@
 <body>
     <%- include("header.ejs") %>
     <h1>Relatórios</h1>
+ 
     
+
     <label for="opcoes">Selecione uma opção</label>
-    <!-- O select agora chama uma função JavaScript real -->
-    <select name="" id="opcoes" onchange="alternarFormulario(this.value)">
+    <select name="opcoes" id="opcoes" onchange="alternarFormulario(this.value)">
         <option value="">-- Escolha um relatório --</option>
         <option value="opcao1">Relatórios dos funcionários</option>
         <option value="opcao2">Relatórios de Vendas</option>
     </select>
+
+
     
-    <!-- Formulário 1: Funcionários (Inicia escondido com display: none) -->
     <div id="form-funcionarios" style="display: none; margin-top: 20px;">
         <form action="/relatorios" method="POST">
             <input type="hidden" name="tipo" value="funcionarios">
@@ -27,7 +29,7 @@
         </form>
     </div>
 
-    <!-- Formulário 2: Vendas (Inicia escondido também) -->
+    
     <div id="form-vendas" style="display: none; margin-top: 20px;">
         <form action="/relatorios" method="POST">
             <input type="hidden" name="tipo" value="vendas">
@@ -37,17 +39,26 @@
         </form>
     </div>
 
-    <!-- JavaScript que roda direto no navegador do usuário -->
+   <% if (locals.funcionarios) { %>
+    <% funcionarios.forEach(funcionario => { %>
+      
+        <p>Nome: <%= funcionario.nomeF %></p>
+        <p>ID: <%= funcionario.id %></p> 
+        <hr>
+    <% }); %>
+<% } %>
+
+
     <script>
     function alternarFormulario(opcaoSelecionada) {
         const formFuncionarios = document.getElementById('form-funcionarios');
         const formVendas = document.getElementById('form-vendas');
 
-        // Primeiro, esconde ambos para garantir um reset
+       
         formFuncionarios.style.display = 'none';
         formVendas.style.display = 'none';
 
-        // Mostra o formulário baseado na opção que o usuário clicou
+     
         if (opcaoSelecionada === 'opcao1') {
             formFuncionarios.style.display = 'block';
         } else if (opcaoSelecionada === 'opcao2') {
