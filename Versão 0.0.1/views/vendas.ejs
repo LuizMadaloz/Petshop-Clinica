@@ -8,13 +8,18 @@
 <body>
     <%- include("header.ejs") %>
     <h1>Vendas</h1>
-    <form action="">
+    <form action="/vendas" method="post">
         <label for="nomeProduto">Nome do Produto</label>
         <input type="text" name="nomeProduto">
         <label for="CodBarras">Códigos de barras</label>
         <input type="text" name="codBarras" id="">
+        <button type="submit">buscar</button>
     
     </form>
-    
+    <% if(locals.lista) {%>
+        <% lista.forEach(cadastro_produtos=> {%>
+        <p>Nome: <%= cadastro_produtos.item %></p>
+        <% })}; %>
+
 </body>
 </html>

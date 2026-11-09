@@ -96,12 +96,29 @@ app.post("/relatorios", async (req  , res)=>{
     const [resultados] = await connection.query("select * from funcionarios where nomeF like ? and cpf like ?",[`%${nomeFun}%`, `%${nCpf}%`]);
     console.log(resultados);
     listaFunc = resultados;
-  }catch(erro){
-    console.log("ocorreu um erro",erro);
+  }catch(err){
+    console.log("ocorreu um erro",err);
 };};
 
 res.render("relatorios.ejs",{ funcionarios: listaFunc });
 
+});
+
+app.post("/vendas", async (req, res)=>{
+
+  const nomeItem = req.body.nomeProduto || "";
+  let listaItens =[];
+try {
+ const [resultado] = await connection.query("select * from cadastro_produtos where item like ?",[`%${nomeItem}%`]
+);
+
+  listaItens = resultado;
+  console.log(listaItens);
+}catch(e){
+  console.log("ocorreu um erro", e)
+}
+
+  res.render('vendas.ejs', {lista: listaItens});
 });
 
 
