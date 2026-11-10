@@ -18,7 +18,7 @@
     </form>
 
     <% if(locals.autovenda){ %>
-    <% if(autovenda === "sim"){%>
+    <% if(autovenda === 1){%>
         <form action="/vendas" method="post">
         <p><%= produto %> Adiconado</p>
         <label for="formaPagamento">Forma de formaPagamento</label>
@@ -30,7 +30,8 @@
         </select>
         <button type="submit">Finalizar venda</button>
         </form>
-        <% }else{ %>
+        <% }else if(autovenda === 2){ %>
+            <p><%= produto %>  em falta</p>
 
        <% }}; %>
         

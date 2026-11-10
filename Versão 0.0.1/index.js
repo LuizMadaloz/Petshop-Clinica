@@ -108,7 +108,7 @@ app.post("/vendas", async (req, res)=>{
 
   const nomeItem = req.body.nomeProduto || "";
   let listaItens =[];
-  let devenda ='não';
+  let devenda = 0;
   let produto = '';
 try {
  const [resultado] = await connection.query("select * from cadastro_produtos where item like ?",[`%${nomeItem}%`]
@@ -124,10 +124,14 @@ if(req.body.nomeItem){
   const quantidade = req.body.itemQuant;
   try{
     const[estoque] = await connection.query(`select quant_estoque from cadastro_produtos where item = '${produto}'`);
-    if(estoque >= quantidade){
-      devenda = 'sim';
+     const estoqueAtual = estoque[0].quant_estoque;
+     console.log(estoque)
+     console.log(estoqueAtual)
+    if(quantidade <= estoqueAtual){
+      devenda = 1;
 
     }else{
+      devenda = 2;
       console.log("quantidade acima do estoque")
     }
   }catch(e){
@@ -138,7 +142,14 @@ if(req.body.nomeItem){
   res.render('vendas.ejs', {lista: listaItens , autovenda: devenda, produto: produto});
 });
 
+app.post('servico', async (req , res) =>{
+let servico = req.body.servicoex || "";
+try{
+  const[buscaServico] = await connection.query() //Não criei a table nessa versão ainda
+}catch{
 
+}
+})
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
