@@ -108,6 +108,8 @@ app.post("/vendas", async (req, res)=>{
 
   const nomeItem = req.body.nomeProduto || "";
   let listaItens =[];
+  let devenda ='não';
+  let produto = '';
 try {
  const [resultado] = await connection.query("select * from cadastro_produtos where item like ?",[`%${nomeItem}%`]
 );
@@ -117,8 +119,23 @@ try {
 }catch(e){
   console.log("ocorreu um erro", e)
 }
+if(req.body.nomeItem){
+  produto = req.body.nomeItem;
+  const quantidade = req.body.itemQuant;
+  try{
+    const[estoque] = await connection.query(`select quant_estoque from cadastro_produtos where item = '${produto}'`);
+    if(estoque >= quantidade){
+      devenda = 'sim';
 
-  res.render('vendas.ejs', {lista: listaItens});
+    }else{
+      console.log("quantidade acima do estoque")
+    }
+  }catch(e){
+    console.log("ocorreu um erro", e)
+  }
+
+};
+  res.render('vendas.ejs', {lista: listaItens , autovenda: devenda, produto: produto});
 });
 
 

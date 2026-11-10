@@ -16,9 +16,35 @@
         <button type="submit">buscar</button>
     
     </form>
+
+    <% if(locals.autovenda){ %>
+    <% if(autovenda === "sim"){%>
+        <form action="/vendas" method="post">
+        <p><%= produto %> Adiconado</p>
+        <label for="formaPagamento">Forma de formaPagamento</label>
+        <select name="formaPagamento" id="" required>
+            <option value="">selecione...</option>
+            <option value="debito">Debito</option>
+            <option value="credito">Crédito</option>
+            <option value="dinheiro">Dinheiro</option>
+        </select>
+        <button type="submit">Finalizar venda</button>
+        </form>
+        <% }else{ %>
+
+       <% }}; %>
+        
+
     <% if(locals.lista) {%>
         <% lista.forEach(cadastro_produtos=> {%>
+            <form action="/vendas" method="post">
         <p>Nome: <%= cadastro_produtos.item %></p>
+        <label for="itemQuant">Quantidade</label>
+        <input type="text" name="itemQuant">
+        <input type="hidden" name="nomeItem" value="<%= cadastro_produtos.item %>">
+        <button type="submit">Adcionar</button>
+
+        </form>
         <% })}; %>
 
 </body>
